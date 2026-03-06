@@ -1,0 +1,42 @@
+# Parameter definitions for thorn KerrSchild
+
+SHARES: ADMBaseX
+
+EXTENDS KEYWORD initial_data 
+{
+  "KerrSchild" :: "Kerr metric in Kerr-Schild coordinates"
+} 
+
+EXTENDS KEYWORD initial_lapse
+{
+  "KerrSchild" :: "Kerr metric in Kerr-Schild coordinates"
+}
+
+EXTENDS KEYWORD initial_shift
+{
+  "KerrSchild" :: "Kerr metric in Kerr-Schild coordinates"
+}
+
+EXTENDS KEYWORD initial_dtlapse
+{
+  "KerrSchild" :: "Kerr metric in Kerr-Schild coordinates"
+}
+
+EXTENDS KEYWORD initial_dtshift
+{
+  "KerrSchild" :: "Kerr metric in Kerr-Schild coordinates"
+}
+
+
+
+PRIVATE:
+
+CCTK_REAL mass "mass of the black hole"
+{
+  0.0:* :: ""
+} 1.0
+
+CCTK_REAL angv "rotational parameter of the spin object"
+{
+  0.0:* :: ""
+} 0.0
