@@ -12,6 +12,7 @@
 
 KerrSchildAuxVarlist =
   DefTensors[
+    {KSr[], PrintAs -> "R"},
     {KSk0 [], PrintAs -> "\!\(\*SubscriptBox[\(k\), \(0\)]\)"},
     {KSk[-i], PrintAs -> "k"},
     {KSf[], PrintAs -> "f"},

@@ -24,15 +24,15 @@ DefScalarFunction[radi, PrintAs -> "r"];
 
 ComponentValue[KSk0[], 1];
 
-ComponentValue[KSk[{1, -GetDefaultChart[]}], (radi[X[], Y[], Z[]] X[] + angv Y[]) / (radi[X[], Y[], Z[]] ^ 2 + angv^2)];
+ComponentValue[KSk[{1, -GetDefaultChart[]}], (KSr[] X[] + angv Y[]) / (KSr[] ^ 2 + angv^2)];
 
-ComponentValue[KSk[{2, -GetDefaultChart[]}], (radi[X[], Y[], Z[]] Y[] - angv X[]) / (radi[X[], Y[], Z[]] ^ 2 + angv^2)];
+ComponentValue[KSk[{2, -GetDefaultChart[]}], (KSr[] Y[] - angv X[]) / (KSr[] ^ 2 + angv^2)];
 
-ComponentValue[KSk[{3, -GetDefaultChart[]}], Z[] / radi[X[], Y[], Z[]]];
+ComponentValue[KSk[{3, -GetDefaultChart[]}], Z[] / KSr[]];
 
-ComponentValue[KSf[], radi[X[], Y[], Z[]] ^ 2 / (radi[X[], Y[], Z[]] ^ 4 + angv^2 Z[] ^ 2) 2 mass radi[X[], Y[], Z[]]];
+ComponentValue[KSf[], KSr[] ^ 2 / (KSr[] ^ 4 + angv^2 Z[] ^ 2) 2 mass KSr[]];
 
-ComponentValue[KSalpha[], (1 + (2 mass radi[X[], Y[], Z[]] ^ 3) / (radi[X[], Y[], Z[]] ^ 4 + angv^2 Z[] ^ 2)) ^ (-1/2)];
+ComponentValue[KSalpha[], (1 + (2 mass KSr[] ^ 3) / (KSr[] ^ 4 + angv^2 Z[] ^ 2)) ^ (-1/2)];
 
 Do[ComponentValue[KSgam[{ii, -GetDefaultChart[]}, {jj, -GetDefaultChart[]}], KroneckerDelta[ii, jj] + KSf[] KSk[{ii, -GetDefaultChart[]}] KSk[{jj, -GetDefaultChart[]}] // ToValues], {ii, 1, 3}, {jj, 1, 3}];
 
