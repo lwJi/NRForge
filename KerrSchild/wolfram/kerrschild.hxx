@@ -26,7 +26,7 @@ const auto ADMdtbeta2 = gf_ADMdtbeta[1];
 const auto ADMdtbeta3 = gf_ADMdtbeta[2];
 
 noinline([&]() __attribute__((__flatten__, __hot__)) {
-grid.loop_int_device<0, 0, 0>(
+grid.loop_all_device<0, 0, 0>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
