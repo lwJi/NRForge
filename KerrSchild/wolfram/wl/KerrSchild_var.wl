@@ -12,8 +12,6 @@
 
 KerrSchildAuxVarlist =
   DefTensors[
-    {KSr[], PrintAs -> "R"},
-    {KSdr[-i], PrintAs -> "\[PartialD]R"},
     {KSk0 [], PrintAs -> "\!\(\*SubscriptBox[\(k\), \(0\)]\)"},
     {KSk[-i], PrintAs -> "k"},
     {KSf[], PrintAs -> "f"},
@@ -24,6 +22,8 @@ KerrSchildAuxVarlist =
 
 KerrSchildTempVarlist =
   TempTensors[
+    {rad[], PrintAs -> "R"},
+    {drad[-i], PrintAs -> "\[PartialD]R"},
     {gam[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[Gamma]"},
     {detinvgam[], PrintAs -> "\[Gamma]"},
     {invgam[i, j], Symmetric[{i, j}], PrintAs -> "\[Gamma]"},

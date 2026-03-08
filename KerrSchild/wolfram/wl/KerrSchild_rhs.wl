@@ -14,7 +14,13 @@ DefConstantSymbol[angv, PrintAs -> "a"];
 
 DefConstantSymbol[mass, PrintAs -> "M"];
 
-radi$expl = (Sqrt[1/2 (-angv^2 + X[]^2 + Y[]^2 + Z[]^2 + Sqrt[4 angv^2 Z[]^2 + (angv^2 - X[]^2 - Y[]^2 - Z[]^2)^2])] // Simplify);
+rad$expl = (Sqrt[1/2 (-angv^2 + X[]^2 + Y[]^2 + Z[]^2 + Sqrt[4 angv^2 Z[]^2 + (angv^2 - X[]^2 - Y[]^2 - Z[]^2)^2])] // Simplify);
+
+rad$rule = {
+  (PDOfBasis[cart][{1, -cart}][rad[]] // ToValues) -> (drad[{1, -cart}] // ToValues),
+  (PDOfBasis[cart][{2, -cart}][rad[]] // ToValues) -> (drad[{2, -cart}] // ToValues),
+  (PDOfBasis[cart][{3, -cart}][rad[]] // ToValues) -> (drad[{3, -cart}] // ToValues)
+};
 
 (***********************)
 
@@ -22,19 +28,23 @@ radi$expl = (Sqrt[1/2 (-angv^2 + X[]^2 + Y[]^2 + Z[]^2 + Sqrt[4 angv^2 Z[]^2 + (
 
 (***********************)
 
-ComponentValue[KSr[], radi$expl];
+ComponentValue[X[], coX];
+
+ComponentValue[Y[], coY];
+
+ComponentValue[Z[], coZ];
 
 ComponentValue[KSk0[], 1];
 
-ComponentValue[KSk[{1, -cart}], (KSr[] X[] + angv Y[]) / (KSr[] ^ 2 + angv^2)];
+ComponentValue[KSk[{1, -cart}], (rad[] X[] + angv Y[]) / (rad[] ^ 2 + angv^2)];
 
-ComponentValue[KSk[{2, -cart}], (KSr[] Y[] - angv X[]) / (KSr[] ^ 2 + angv^2)];
+ComponentValue[KSk[{2, -cart}], (rad[] Y[] - angv X[]) / (rad[] ^ 2 + angv^2)];
 
-ComponentValue[KSk[{3, -cart}], Z[] / KSr[]];
+ComponentValue[KSk[{3, -cart}], Z[] / rad[]];
 
-ComponentValue[KSf[], KSr[] ^ 2 / (KSr[] ^ 4 + angv^2 Z[] ^ 2) 2 mass KSr[]];
+ComponentValue[KSf[], rad[] ^ 2 / (rad[] ^ 4 + angv^2 Z[] ^ 2) 2 mass rad[]];
 
-ComponentValue[KSalpha[], (1 + (2 mass KSr[] ^ 3) / (KSr[] ^ 4 + angv^2 Z[] ^ 2)) ^ (-1/2)];
+ComponentValue[KSalpha[], (1 + (2 mass rad[] ^ 3) / (rad[] ^ 4 + angv^2 Z[] ^ 2)) ^ (-1/2)];
 
 Do[ComponentValue[KSgam[{ii, -cart}, {jj, -cart}], KroneckerDelta[ii, jj] + KSf[] KSk[{ii, -cart}] KSk[{jj, -cart}] // ToValues], {ii, 1, 3}, {jj, 1, 3}];
 
@@ -46,7 +56,11 @@ Do[ComponentValue[KSbeta[{ii, -cart}], KSf[] KSk0[] KSk[{ii, -cart}] // ToValues
 
 (***********************)
 
-SetEQNDelayed[gam[i_, j_], KSgam[i, j]];
+SetEQNDelayed[rad[], rad$expl];
+
+SetEQNDelayed[drad[i_], PDOfBasis[cart][i][rad$expl]];
+
+SetEQNDelayed[gam[i_, j_], KSgam[i, j] // ToValues];
 
 Module[{Mat, invMat},
   Mat = Table[gam[{ii, -cart}, {jj, -cart}] // ToValues, {ii, 1, 3}, {jj, 1, 3}];
@@ -55,11 +69,11 @@ Module[{Mat, invMat},
   SetEQNDelayed[invgam[i_, j_], invMat[[i[[1]], j[[1]]]] // Simplify];
 ];
 
-SetEQNDelayed[betaD[i_], KSbeta[i]];
+SetEQNDelayed[betaD[i_], KSbeta[i] // ToValues];
 
 SetEQNDelayed[beta[i_], invgam[i, j] betaD[-j]];
 
-SetEQNDelayed[alpha[], KSalpha[]];
+SetEQNDelayed[alpha[], KSalpha[] // ToValues];
 
 SetEQNDelayed[dbetaDD[k_, i_], PDOfBasis[cart][k][KSbeta[i]]];
 
@@ -80,3 +94,8 @@ SetEQN[ADMbeta[i_], beta[i]];
 SetEQN[ADMalpha[], alpha[]];
 
 SetEQN[ADMK[i_, j_], (dbetaDD[i, j] + dbetaDD[j, i] - 2 Gambeta[i, j]) / (2 alpha[])];
+
+SetEQN[ADMdtbeta[i_], 0];
+
+SetEQN[ADMdtalpha[], 0];
+
