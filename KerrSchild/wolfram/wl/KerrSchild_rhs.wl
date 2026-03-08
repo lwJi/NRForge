@@ -1,0 +1,80 @@
+(* ::Package:: *)
+
+(* KerrSchild_rhs.wl *)
+
+(* (c) Liwei Ji, 03/2026 *)
+
+(*****************)
+
+(* BH Parameters *)
+
+(*****************)
+
+DefConstantSymbol[angv, PrintAs -> "a"];
+
+DefConstantSymbol[mass, PrintAs -> "M"];
+
+DefScalarFunction[radi, PrintAs -> "r"];
+
+(***********************)
+
+(* Auxiliary Variables *)
+
+(***********************)
+
+ComponentValue[KSk0[], 1];
+
+ComponentValue[KSk[{1, -cart}], (radi[X[], Y[], Z[]] X[] + angv Y[]) / (radi[X[], Y[], Z[]] ^ 2 + angv^2)];
+
+ComponentValue[KSk[{2, -cart}], (radi[X[], Y[], Z[]] Y[] - angv X[]) / (radi[X[], Y[], Z[]] ^ 2 + angv^2)];
+
+ComponentValue[KSk[{3, -cart}], Z[] / radi[X[], Y[], Z[]]];
+
+ComponentValue[KSf[], radi[X[], Y[], Z[]] ^ 2 / (radi[X[], Y[], Z[]] ^ 4 + angv^2 Z[] ^ 2) 2 mass radi[X[], Y[], Z[]]];
+
+ComponentValue[KSalpha[], (1 + (2 mass radi[X[], Y[], Z[]] ^ 3) / (radi[X[], Y[], Z[]] ^ 4 + angv^2 Z[] ^ 2)) ^ (-1/2)];
+
+Do[ComponentValue[KSgam[{ii, -cart}, {jj, -cart}], KroneckerDelta[ii, jj] + KSf[] KSk[{ii, -cart}] KSk[{jj, -cart}] // ToValues], {ii, 1, 3}, {jj, 1, 3}];
+
+Do[ComponentValue[KSbeta[{ii, -cart}], KSf[] KSk0[] KSk[{ii, -cart}] // ToValues], {ii, 1, 3}];
+
+(***********************)
+
+(* Temporary Variables *)
+
+(***********************)
+
+SetEQNDelayed[gam[i_, j_], KSgam[i, j] // ToValues];
+
+Module[{Mat, invMat},
+  Mat = Table[gam[{ii, -cart}, {jj, -cart}] // ToValues, {ii, 1, 3}, {jj, 1, 3}];
+  invMat = Inverse[Mat] /. {1 / Det[Mat] -> detinvgam};
+  SetEQNDelayed[detinvgam[], 1 / Det[Mat] // Simplify];
+  SetEQNDelayed[invgam[i_, j_], invMat[[i[[1]], j[[1]]]] // Simplify];
+];
+
+SetEQNDelayed[betaD[i_], KSbeta[i] // ToValues];
+
+SetEQNDelayed[beta[i_], invgam[i, j] betaD[-j]];
+
+SetEQNDelayed[alpha[], KSalpha[] // ToValues];
+
+SetEQNDelayed[dbetaDD[k_, i_], PDcart[k][KSbeta[i] // ToValues]];
+
+SetEQNDelayed[dgamDDD[k_, i_, j_], PDcart[k][KSgam[i, j] // ToValues]];
+
+SetEQNDelayed[Gambeta[i_, j_], 1/2 beta[l] (dgamDDD[i, j, -l] + dgamDDD[j, -l, i] - dgamDDD[-l, i, j])];
+
+(*****************)
+
+(* ADM Variables *)
+
+(*****************)
+
+SetEQN[ADMgam[i_, j_], gam[i, j]];
+
+SetEQN[ADMbeta[i_], beta[i]];
+
+SetEQN[ADMalpha[], alpha[]];
+
+SetEQN[ADMK[i_, j_], (dbetaDD[i, j] + dbetaDD[j, i] - 2 Gambeta[i, j]) / (2 alpha[])];
