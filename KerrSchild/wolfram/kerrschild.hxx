@@ -10,12 +10,12 @@ const auto ADMgam13 = gf_ADMgam[2];
 const auto ADMgam22 = gf_ADMgam[3];
 const auto ADMgam23 = gf_ADMgam[4];
 const auto ADMgam33 = gf_ADMgam[5];
-const auto ADMK11 = gf_ADMK[0];
-const auto ADMK12 = gf_ADMK[1];
-const auto ADMK13 = gf_ADMK[2];
-const auto ADMK22 = gf_ADMK[3];
-const auto ADMK23 = gf_ADMK[4];
-const auto ADMK33 = gf_ADMK[5];
+const auto ADMexK11 = gf_ADMexK[0];
+const auto ADMexK12 = gf_ADMexK[1];
+const auto ADMexK13 = gf_ADMexK[2];
+const auto ADMexK22 = gf_ADMexK[3];
+const auto ADMexK23 = gf_ADMexK[4];
+const auto ADMexK33 = gf_ADMexK[5];
 const auto ADMalpha = gf_ADMalpha;
 const auto ADMbeta1 = gf_ADMbeta[0];
 const auto ADMbeta2 = gf_ADMbeta[1];
@@ -641,32 +641,32 @@ ADMgam33[ijk]
 gam33
 ;
 
-ADMK11[ijk]
+ADMexK11[ijk]
 =
 (dbetaDD11 - Gambeta11)/alpha
 ;
 
-ADMK12[ijk]
+ADMexK12[ijk]
 =
 (dbetaDD12 + dbetaDD21 - 2*Gambeta12)/(2.*alpha)
 ;
 
-ADMK13[ijk]
+ADMexK13[ijk]
 =
 (dbetaDD13 + dbetaDD31 - 2*Gambeta13)/(2.*alpha)
 ;
 
-ADMK22[ijk]
+ADMexK22[ijk]
 =
 (dbetaDD22 - Gambeta22)/alpha
 ;
 
-ADMK23[ijk]
+ADMexK23[ijk]
 =
 (dbetaDD23 + dbetaDD32 - 2*Gambeta23)/(2.*alpha)
 ;
 
-ADMK33[ijk]
+ADMexK33[ijk]
 =
 (dbetaDD33 - Gambeta33)/alpha
 ;

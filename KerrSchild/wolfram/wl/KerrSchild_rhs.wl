@@ -99,7 +99,7 @@ SetEQN[ADMbeta[i_], beta[i]];
 
 SetEQN[ADMalpha[], alpha[]];
 
-SetEQN[ADMK[i_, j_], (dbetaDD[i, j] + dbetaDD[j, i] - 2 Gambeta[i, j]) / (2 alpha[])];
+SetEQN[ADMexK[i_, j_], (dbetaDD[i, j] + dbetaDD[j, i] - 2 Gambeta[i, j]) / (2 alpha[])];
 
 SetEQN[ADMdtbeta[i_], 0];
 

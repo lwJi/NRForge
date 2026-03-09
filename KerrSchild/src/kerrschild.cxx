@@ -22,7 +22,7 @@ extern "C" void KerrSchild_InitialData(CCTK_ARGUMENTS) {
   const GF3D2layout layout2(cctkGH, {0, 0, 0});
 
   const std::array<CCTK_REAL *, 6> gf_ADMgam{gxx, gxy, gxz, gyy, gyz, gzz};
-  const std::array<CCTK_REAL *, 6> gf_ADMK{kxx, kxy, kxz, kyy, kyz, kzz};
+  const std::array<CCTK_REAL *, 6> gf_ADMexK{kxx, kxy, kxz, kyy, kyz, kzz};
   CCTK_REAL *gf_ADMalpha = alp;
   const std::array<CCTK_REAL *, 3> gf_ADMbeta{betax, betay, betaz};
 
