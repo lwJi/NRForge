@@ -14,6 +14,8 @@ DefConstantSymbol[angv, PrintAs -> "a"];
 
 DefConstantSymbol[mass, PrintAs -> "M"];
 
+rad$expl = Sqrt[1/2 (-angv^2 + X[]^2 + Y[]^2 + Z[]^2 + Sqrt[4 angv^2 Z[]^2 + (angv^2 - X[]^2 - Y[]^2 - Z[]^2)^2])];
+
 rad$rule = {
   (PDOfBasis[cart][{1, -cart}][rad[]] // ToValues) -> (drad[{1, -cart}] // ToValues),
   (PDOfBasis[cart][{2, -cart}][rad[]] // ToValues) -> (drad[{2, -cart}] // ToValues),
@@ -31,8 +33,6 @@ ComponentValue[X[], coX];
 ComponentValue[Y[], coY];
 
 ComponentValue[Z[], coZ];
-
-ComponentValue[KSrad[], (Sqrt[1/2 (-angv^2 + X[]^2 + Y[]^2 + Z[]^2 + Sqrt[4 angv^2 Z[]^2 + (angv^2 - X[]^2 - Y[]^2 - Z[]^2)^2])] // Simplify)];
 
 ComponentValue[KSk0[], 1];
 
@@ -56,9 +56,11 @@ Do[ComponentValue[KSbeta[{ii, -cart}], KSf[] KSk0[] KSk[{ii, -cart}] // ToValues
 
 (***********************)
 
-SetEQNDelayed[rad[], KSrad[]];
+(* TODO: fix the inconsistency with 'Sqrt'
+SetEQNDelayed[rad[], rad$expl];
+*)
 
-SetEQNDelayed[drad[i_], PDOfBasis[cart][i][KSrad[]]];
+SetEQNDelayed[drad[i_], PDOfBasis[cart][i][rad$expl]];
 
 SetEQNDelayed[gam[i_, j_], KSgam[i, j] // ToValues];
 

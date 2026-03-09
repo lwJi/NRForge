@@ -53,7 +53,13 @@ SetMainPrint[
   pr["const int ijk = layout2.linear(p.i, p.j, p.k);"];
   pr[];
 
-  PrintEquations[{Mode -> "Temp", ExtraReplaceRules -> rad$rule}, KerrSchildTempVarlist];
+  pr["const " <> GetTempVariableType[] <> " "];
+  pr[ToString[rad[] // ToValues]];
+  pr["="];
+  PutAppend[CForm[rad$expl], GetOutputFile[]];
+  pr[";\n"]
+
+  PrintEquations[{Mode -> "Temp", ExtraReplaceRules -> rad$rule}, KerrSchildTempVarlist[[2;;-1]]];
   pr[];
 
   PrintEquations[{Mode -> "MainOut"}, ADMVarlist];
