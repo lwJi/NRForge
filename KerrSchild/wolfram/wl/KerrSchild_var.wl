@@ -25,13 +25,13 @@ KerrSchildTempVarlist =
   TempTensors[
     {rad[], PrintAs -> "R"},
     {drad[-i], PrintAs -> "\[PartialD]R"},
+    {dbetaDD[-k, -i], PrintAs -> "\[PartialD]\[Beta]"},
+    {dgamDDD[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\[Gamma]"},
     {gam[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[Gamma]"},
     {detinvgam[], PrintAs -> "\[Gamma]"},
     {invgam[i, j], Symmetric[{i, j}], PrintAs -> "\[Gamma]"},
     {betaD[-i], PrintAs -> "\[Beta]"},
     {beta  [i], PrintAs -> "\[Beta]"},
     {alpha  [], PrintAs -> "\[Alpha]"},
-    {dbetaDD[-k, -i], PrintAs -> "\[PartialD]\[Beta]"},
-    {dgamDDD[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\[Gamma]"},
     {Gambeta[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[CapitalGamma]\[Beta]"}
   ];

@@ -62,150 +62,14 @@ drad2
 const auto
 drad3
 =
-(coZ*(Power(angv,2) + Power(coX,2) + Power(coY,2) + Power(coZ,2) +
-      Sqrt(4*Power(angv,2)*Power(coZ,2) +
-        Power(-Power(angv,2) + Power(coX,2) + Power(coY,2) + Power(coZ,2),2)\
-)))/(Sqrt(2)*Sqrt(4*Power(angv,2)*Power(coZ,2) +
-      Power(-Power(angv,2) + Power(coX,2) + Power(coY,2) + Power(coZ,2),2))*
-    Sqrt(-Power(angv,2) + Power(coX,2) + Power(coY,2) + Power(coZ,2) +
-      Sqrt(4*Power(angv,2)*Power(coZ,2) +
+(coZ*(1 + (Power(angv,2) + Power(coX,2) + Power(coY,2) + Power(coZ,2))/
+       Sqrt(4*Power(angv,2)*Power(coZ,2) +
+         Power(-Power(angv,2) + Power(coX,2) + Power(coY,2) + Power(coZ,2),
+          2))))/
+  (Sqrt(2)*Sqrt(-Power(angv,2) + Power(coX,2) + Power(coY,2) +
+      Power(coZ,2) + Sqrt(4*Power(angv,2)*Power(coZ,2) +
         Power(-Power(angv,2) + Power(coX,2) + Power(coY,2) + Power(coZ,2),2))\
 ))
-;
-
-const auto
-gam11
-=
-1 + (2*mass*Power(rad,3)*Power(angv*coY + coX*rad,2))/
-   (Power(Power(angv,2) + Power(rad,2),2)*
-     (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
-;
-
-const auto
-gam12
-=
-(2*mass*Power(rad,3)*(angv*coY + coX*rad)*(-(angv*coX) + coY*rad))/
-  (Power(Power(angv,2) + Power(rad,2),2)*
-    (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
-;
-
-const auto
-gam13
-=
-(2*coZ*mass*Power(rad,2)*(angv*coY + coX*rad))/
-  ((Power(angv,2) + Power(rad,2))*
-    (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
-;
-
-const auto
-gam22
-=
-1 + (2*mass*Power(rad,3)*Power(angv*coX - coY*rad,2))/
-   (Power(Power(angv,2) + Power(rad,2),2)*
-     (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
-;
-
-const auto
-gam23
-=
-(2*coZ*mass*Power(rad,2)*(-(angv*coX) + coY*rad))/
-  ((Power(angv,2) + Power(rad,2))*
-    (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
-;
-
-const auto
-gam33
-=
-1 + (2*Power(coZ,2)*mass*rad)/(Power(angv,2)*Power(coZ,2) + Power(rad,4))
-;
-
-const auto
-detinvgam
-=
-1/(-(Power(gam13,2)*gam22) + 2*gam12*gam13*gam23 - gam11*Power(gam23,2) -
-    Power(gam12,2)*gam33 + gam11*gam22*gam33)
-;
-
-const auto
-invgam11
-=
-detinvgam*(-Power(gam23,2) + gam22*gam33)
-;
-
-const auto
-invgam12
-=
-detinvgam*(gam13*gam23 - gam12*gam33)
-;
-
-const auto
-invgam13
-=
-detinvgam*(-(gam13*gam22) + gam12*gam23)
-;
-
-const auto
-invgam22
-=
-detinvgam*(-Power(gam13,2) + gam11*gam33)
-;
-
-const auto
-invgam23
-=
-detinvgam*(gam12*gam13 - gam11*gam23)
-;
-
-const auto
-invgam33
-=
-detinvgam*(-Power(gam12,2) + gam11*gam22)
-;
-
-const auto
-betaD1
-=
-(2*mass*Power(rad,3)*(angv*coY + coX*rad))/
-  ((Power(angv,2) + Power(rad,2))*
-    (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
-;
-
-const auto
-betaD2
-=
-(2*mass*Power(rad,3)*(-(angv*coX) + coY*rad))/
-  ((Power(angv,2) + Power(rad,2))*
-    (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
-;
-
-const auto
-betaD3
-=
-(2*coZ*mass*Power(rad,2))/(Power(angv,2)*Power(coZ,2) + Power(rad,4))
-;
-
-const auto
-beta1
-=
-betaD1*invgam11 + betaD2*invgam12 + betaD3*invgam13
-;
-
-const auto
-beta2
-=
-betaD1*invgam12 + betaD2*invgam22 + betaD3*invgam23
-;
-
-const auto
-beta3
-=
-betaD1*invgam13 + betaD2*invgam23 + betaD3*invgam33
-;
-
-const auto
-alpha
-=
-1/Sqrt(1 + (2*mass*Power(rad,3))/(Power(angv,2)*Power(coZ,2) + Power(rad,4)))
 ;
 
 const auto
@@ -563,6 +427,141 @@ dgamDDD333
 (2*coZ*mass*(2*Power(rad,5) + drad3*
        (Power(angv,2)*Power(coZ,3) - 3*coZ*Power(rad,4))))/
   Power(Power(angv,2)*Power(coZ,2) + Power(rad,4),2)
+;
+
+const auto
+gam11
+=
+1 + (2*mass*Power(rad,3)*Power(angv*coY + coX*rad,2))/
+   (Power(Power(angv,2) + Power(rad,2),2)*
+     (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
+;
+
+const auto
+gam12
+=
+(2*mass*Power(rad,3)*(angv*coY + coX*rad)*(-(angv*coX) + coY*rad))/
+  (Power(Power(angv,2) + Power(rad,2),2)*
+    (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
+;
+
+const auto
+gam13
+=
+(2*coZ*mass*Power(rad,2)*(angv*coY + coX*rad))/
+  ((Power(angv,2) + Power(rad,2))*
+    (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
+;
+
+const auto
+gam22
+=
+1 + (2*mass*Power(rad,3)*Power(angv*coX - coY*rad,2))/
+   (Power(Power(angv,2) + Power(rad,2),2)*
+     (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
+;
+
+const auto
+gam23
+=
+(2*coZ*mass*Power(rad,2)*(-(angv*coX) + coY*rad))/
+  ((Power(angv,2) + Power(rad,2))*
+    (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
+;
+
+const auto
+gam33
+=
+1 + (2*Power(coZ,2)*mass*rad)/(Power(angv,2)*Power(coZ,2) + Power(rad,4))
+;
+
+const auto
+detinvgam
+=
+1/(-(Power(gam13,2)*gam22) + 2*gam12*gam13*gam23 - gam11*Power(gam23,2) -
+    Power(gam12,2)*gam33 + gam11*gam22*gam33)
+;
+
+const auto
+invgam11
+=
+detinvgam*(-Power(gam23,2) + gam22*gam33)
+;
+
+const auto
+invgam12
+=
+detinvgam*(gam13*gam23 - gam12*gam33)
+;
+
+const auto
+invgam13
+=
+detinvgam*(-(gam13*gam22) + gam12*gam23)
+;
+
+const auto
+invgam22
+=
+detinvgam*(-Power(gam13,2) + gam11*gam33)
+;
+
+const auto
+invgam23
+=
+detinvgam*(gam12*gam13 - gam11*gam23)
+;
+
+const auto
+invgam33
+=
+detinvgam*(-Power(gam12,2) + gam11*gam22)
+;
+
+const auto
+betaD1
+=
+(2*mass*Power(rad,3)*(angv*coY + coX*rad))/
+  ((Power(angv,2) + Power(rad,2))*
+    (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
+;
+
+const auto
+betaD2
+=
+(2*mass*Power(rad,3)*(-(angv*coX) + coY*rad))/
+  ((Power(angv,2) + Power(rad,2))*
+    (Power(angv,2)*Power(coZ,2) + Power(rad,4)))
+;
+
+const auto
+betaD3
+=
+(2*coZ*mass*Power(rad,2))/(Power(angv,2)*Power(coZ,2) + Power(rad,4))
+;
+
+const auto
+beta1
+=
+betaD1*invgam11 + betaD2*invgam12 + betaD3*invgam13
+;
+
+const auto
+beta2
+=
+betaD1*invgam12 + betaD2*invgam22 + betaD3*invgam23
+;
+
+const auto
+beta3
+=
+betaD1*invgam13 + betaD2*invgam23 + betaD3*invgam33
+;
+
+const auto
+alpha
+=
+1/Sqrt(1 + (2*mass*Power(rad,3))/(Power(angv,2)*Power(coZ,2) + Power(rad,4)))
 ;
 
 const auto

@@ -34,6 +34,8 @@ ComponentValue[Y[], coY];
 
 ComponentValue[Z[], coZ];
 
+ComponentValue[KSrad[], rad$expl];
+
 (* https://en.wikipedia.org/wiki/Kerr_metric *)
 
 ComponentValue[KSk0[], 1];
@@ -59,12 +61,16 @@ Do[ComponentValue[KSbeta[{ii, -cart}], KSf[] KSk0[] KSk[{ii, -cart}] // ToValues
 (***********************)
 
 (* TODO: fix the inconsistency with 'Sqrt'
-SetEQNDelayed[rad[], rad$expl];
+SetEQNDelayed[rad[], KSrad[]];
 *)
 
-SetEQNDelayed[drad[i_], PDOfBasis[cart][i][rad$expl]];
+SetEQNDelayed[drad[i_], PDOfBasis[cart][i][KSrad[]]];
 
-SetEQNDelayed[gam[i_, j_], KSgam[i, j] // ToValues];
+SetEQNDelayed[dbetaDD[k_, i_], PDOfBasis[cart][k][KSbeta[i]]];
+
+SetEQNDelayed[dgamDDD[k_, i_, j_], PDOfBasis[cart][k][KSgam[i, j]]];
+
+SetEQNDelayed[gam[i_, j_], KSgam[i, j]];
 
 Module[{Mat, invMat},
   Mat = Table[gam[{ii, -cart}, {jj, -cart}] // ToValues, {ii, 1, 3}, {jj, 1, 3}];
@@ -73,15 +79,11 @@ Module[{Mat, invMat},
   SetEQNDelayed[invgam[i_, j_], invMat[[i[[1]], j[[1]]]] // Simplify];
 ];
 
-SetEQNDelayed[betaD[i_], KSbeta[i] // ToValues];
+SetEQNDelayed[betaD[i_], KSbeta[i]];
 
 SetEQNDelayed[beta[i_], invgam[i, j] betaD[-j]];
 
-SetEQNDelayed[alpha[], KSalpha[] // ToValues];
-
-SetEQNDelayed[dbetaDD[k_, i_], PDOfBasis[cart][k][KSbeta[i]]];
-
-SetEQNDelayed[dgamDDD[k_, i_, j_], PDOfBasis[cart][k][KSgam[i, j]]];
+SetEQNDelayed[alpha[], KSalpha[]];
 
 SetEQNDelayed[Gambeta[i_, j_], 1/2 beta[l] (dgamDDD[i, j, -l] + dgamDDD[j, -l, i] - dgamDDD[-l, i, j])];
 
