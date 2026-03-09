@@ -34,6 +34,8 @@ ComponentValue[Y[], coY];
 
 ComponentValue[Z[], coZ];
 
+(* https://en.wikipedia.org/wiki/Kerr_metric *)
+
 ComponentValue[KSk0[], 1];
 
 ComponentValue[KSk[{1, -cart}], (rad[] X[] + angv Y[]) / (rad[] ^ 2 + angv^2)];
