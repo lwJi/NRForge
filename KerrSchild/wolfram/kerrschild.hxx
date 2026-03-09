@@ -30,6 +30,10 @@ grid.loop_all_device<0, 0, 0>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
+const auto coX = p.x;
+const auto coY = p.y;
+const auto coZ = p.z;
+
 const auto
 rad
 =

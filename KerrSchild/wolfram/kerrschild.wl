@@ -53,6 +53,11 @@ SetMainPrint[
   pr["const int ijk = layout2.linear(p.i, p.j, p.k);"];
   pr[];
 
+  pr["const auto coX = p.x;"];
+  pr["const auto coY = p.y;"];
+  pr["const auto coZ = p.z;"];
+  pr[];
+
   pr["const " <> GetTempVariableType[] <> " "];
   pr[ToString[rad[] // ToValues]];
   pr["="];
