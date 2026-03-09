@@ -56,7 +56,7 @@ SetMainPrint[
   pr["const " <> GetTempVariableType[] <> " "];
   pr[ToString[rad[] // ToValues]];
   pr["="];
-  PutAppend[CForm[rad$expl], GetOutputFile[]];
+  PutAppend[CForm[rad$expl // ToValues], GetOutputFile[]];
   pr[";\n"]
 
   PrintEquations[{Mode -> "Temp", ExtraReplaceRules -> rad$rule}, KerrSchildTempVarlist[[2;;-1]]];

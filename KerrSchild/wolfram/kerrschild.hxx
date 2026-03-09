@@ -33,9 +33,9 @@ const int ijk = layout2.linear(p.i, p.j, p.k);
 const auto
 rad
 =
-Sqrt(-Power(angv,2) + Power(X(),2) + Power(Y(),2) + Power(Z(),2) +
-    Sqrt(4*Power(angv,2)*Power(Z(),2) +
-      Power(Power(angv,2) - Power(X(),2) - Power(Y(),2) - Power(Z(),2),2)))/
+Sqrt(-Power(angv,2) + Power(coX,2) + Power(coY,2) + Power(coZ,2) +
+    Sqrt(4*Power(angv,2)*Power(coZ,2) +
+      Power(Power(angv,2) - Power(coX,2) - Power(coY,2) - Power(coZ,2),2)))/
   Sqrt(2)
 ;
 
