@@ -28,7 +28,7 @@ KerrSchildTempVarlist =
     {dbetaDD[-k, -i], PrintAs -> "\[PartialD]\[Beta]"},
     {dgamDDD[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\[Gamma]"},
     {gam[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[Gamma]"},
-    {detinvgam[], PrintAs -> "\[Gamma]"},
+    {detinvgam[], PrintAs -> "1/\[Gamma]"},
     {invgam[i, j], Symmetric[{i, j}], PrintAs -> "\[Gamma]"},
     {betaD[-i], PrintAs -> "\[Beta]"},
     {beta  [i], PrintAs -> "\[Beta]"},
