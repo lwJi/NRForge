@@ -33,5 +33,5 @@ KerrSchildTempVarlist =
     {betaD[-i], PrintAs -> "\[Beta]"},
     {beta  [i], PrintAs -> "\[Beta]"},
     {alpha  [], PrintAs -> "\[Alpha]"},
-    {Gambeta[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[CapitalGamma]\[Beta]"}
+    {Gambeta[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SuperscriptBox[\(\[CapitalGamma]\), \(\[Beta]\)]\)"}
   ];
