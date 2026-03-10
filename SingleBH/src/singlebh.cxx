@@ -38,6 +38,16 @@ extern "C" void Schwarzschild_InitialData(CCTK_ARGUMENTS) {
         gyy(p.I) = 1.0 + (invf - 1.0) * (p.y * p.y) / (r * r);
         gyz(p.I) = 0.0 + (invf - 1.0) * (p.y * p.z) / (r * r);
         gzz(p.I) = 1.0 + (invf - 1.0) * (p.z * p.z) / (r * r);
+        kxx(p.I) = 0.0;
+        kxy(p.I) = 0.0;
+        kxz(p.I) = 0.0;
+        kyy(p.I) = 0.0;
+        kyz(p.I) = 0.0;
+        kzz(p.I) = 0.0;
+        dtalp(p.I) = 0.0;
+        dtbetax(p.I) = 0.0;
+        dtbetay(p.I) = 0.0;
+        dtbetaz(p.I) = 0.0;
       });
 }
 
