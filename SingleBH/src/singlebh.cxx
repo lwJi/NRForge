@@ -65,6 +65,8 @@ extern "C" void KerrSchild_InitialData(CCTK_ARGUMENTS) {
   CCTK_REAL *gf_ADMdtalpha = dtalp;
   const std::array<CCTK_REAL *, 3> gf_ADMdtbeta{dtbetax, dtbetay, dtbetaz};
 
+  const auto eps = epsilon;
+
   const Loop::GridDescBaseDevice grid(cctkGH);
 
 #include "../wolfram/kerrschild.hxx"

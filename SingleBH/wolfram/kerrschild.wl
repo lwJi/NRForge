@@ -60,9 +60,9 @@ SetMainPrint[
 
   pr["const " <> GetTempVariableType[] <> " "];
   pr[ToString[rad[] // ToValues]];
-  pr["="];
+  pr["= std::max(eps, "];
   PutAppend[CForm[rad$expl // ToValues], GetOutputFile[]];
-  pr[";\n"]
+  pr[");\n"];
 
   PrintEquations[{Mode -> "Temp", ExtraReplaceRules -> rad$rule}, KerrSchildTempVarlist[[2;;-1]]];
   pr[];

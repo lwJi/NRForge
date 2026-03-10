@@ -36,12 +36,12 @@ const auto coZ = p.z;
 
 const auto
 rad
-=
+= std::max(eps,
 Sqrt(-Power(angv,2) + Power(coX,2) + Power(coY,2) + Power(coZ,2) +
     Sqrt(4*Power(angv,2)*Power(coZ,2) +
       Power(Power(angv,2) - Power(coX,2) - Power(coY,2) - Power(coZ,2),2)))/
   Sqrt(2)
-;
+);
 
 const auto
 drad1
