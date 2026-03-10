@@ -5,11 +5,11 @@
 
 #include <cmath>
 
-#include <cx_powerinline.hxx>
+#include <util_powerinline.hxx>
 
 namespace SingleBH {
 using namespace Loop;
-using namespace CXUtils;
+using namespace UtilForge;
 
 CCTK_DEVICE CCTK_HOST constexpr CCTK_REAL Sqrt(CCTK_REAL x) {
   return std::sqrt(x);
