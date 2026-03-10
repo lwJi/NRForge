@@ -1,7 +1,11 @@
 # Schedule definitions for thorn SingleBH
 
+SCHEDULE GROUP SingleBH_Initial AT initial
+{
+} "Set up initial conditions of single black hole"
+
 if (CCTK_Equals(initial_data, "Schwarzschild")) {
-  SCHEDULE Schwarzschild_InitialData IN ADMBaseX_SetADMVars
+  SCHEDULE Schwarzschild_InitialData IN SingleBH_Initial
   {
     LANG: C
     WRITES: ADMBaseX::lapse(everywhere)
@@ -12,7 +16,7 @@ if (CCTK_Equals(initial_data, "Schwarzschild")) {
     WRITES: ADMBaseX::dtshift(everywhere)
   } "Set up initial data of Schwarzschild solution"
 } else if (CCTK_Equals(initial_data, "KerrSchild")) {
-  SCHEDULE KerrSchild_InitialData IN ADMBaseX_SetADMVars
+  SCHEDULE KerrSchild_InitialData IN SingleBH_Initial
   {
     LANG: C
     WRITES: ADMBaseX::lapse(everywhere)
