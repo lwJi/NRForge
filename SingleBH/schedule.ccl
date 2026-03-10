@@ -1,4 +1,4 @@
-# Schedule definitions for thorn KerrSchild
+# Schedule definitions for thorn SingleBH
 
 if (CCTK_Equals(initial_data, "KerrSchild") ||
     CCTK_Equals(initial_lapse, "KerrSchild") ||

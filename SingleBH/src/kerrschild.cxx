@@ -7,7 +7,7 @@
 
 #include <cx_powerinline.hxx>
 
-namespace KerrSchild {
+namespace SingleBH {
 using namespace Loop;
 using namespace CXUtils;
 
@@ -34,4 +34,4 @@ extern "C" void KerrSchild_InitialData(CCTK_ARGUMENTS) {
 #include "../wolfram/kerrschild.hxx"
 }
 
-} // namespace KerrSchild
+} // namespace SingleBH

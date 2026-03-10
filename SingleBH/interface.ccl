@@ -1,6 +1,6 @@
-# Interface definition for thorn KerrSchild
+# Interface definition for thorn SingleBH
 
-IMPLEMENTS: KerrSchild
+IMPLEMENTS: SingleBH
 
 INHERITS: ADMBaseX
 
