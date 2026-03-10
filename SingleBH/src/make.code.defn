@@ -2,7 +2,7 @@
 
 # Source files in this directory
 SRCS = \
-	kerrschild.cxx
+	singlebh.cxx
 
 # Subdirectories containing source files
 SUBDIRS =
