@@ -1,17 +1,6 @@
 # Schedule definitions for thorn SingleBH
 
-if (CCTK_Equals(initial_data, "KerrSchild")) {
-  SCHEDULE KerrSchild_InitialData IN ADMBaseX_SetADMVars
-  {
-    LANG: C
-    WRITES: ADMBaseX::lapse(everywhere)
-    WRITES: ADMBaseX::shift(everywhere)
-    WRITES: ADMBaseX::metric(everywhere)
-    WRITES: ADMBaseX::curv(everywhere)
-    WRITES: ADMBaseX::dtlapse(everywhere)
-    WRITES: ADMBaseX::dtshift(everywhere)
-  } "Set up initial data of Kerr solution in Kerr-Schild coordinates"
-} else if (CCTK_Equals(initial_data, "Schwarzschild")) {
+if (CCTK_Equals(initial_data, "Schwarzschild")) {
   SCHEDULE Schwarzschild_InitialData IN ADMBaseX_SetADMVars
   {
     LANG: C
@@ -22,4 +11,15 @@ if (CCTK_Equals(initial_data, "KerrSchild")) {
     WRITES: ADMBaseX::dtlapse(everywhere)
     WRITES: ADMBaseX::dtshift(everywhere)
   } "Set up initial data of Schwarzschild solution"
+} else if (CCTK_Equals(initial_data, "KerrSchild")) {
+  SCHEDULE KerrSchild_InitialData IN ADMBaseX_SetADMVars
+  {
+    LANG: C
+    WRITES: ADMBaseX::lapse(everywhere)
+    WRITES: ADMBaseX::shift(everywhere)
+    WRITES: ADMBaseX::metric(everywhere)
+    WRITES: ADMBaseX::curv(everywhere)
+    WRITES: ADMBaseX::dtlapse(everywhere)
+    WRITES: ADMBaseX::dtshift(everywhere)
+  } "Set up initial data of Kerr solution in Kerr-Schild coordinates"
 }
